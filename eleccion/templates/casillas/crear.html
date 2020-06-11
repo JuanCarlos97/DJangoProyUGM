@@ -1,0 +1,46 @@
+{% extends "template.html" %} {% block content %}
+<main role="main">
+    <div class="container text-center mt-5">
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h1 style="font-size: 28px;">Crear casilla </h1>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+
+                    <nav aria-label="breadcrumb mb-3">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./">Casillas</a></li>
+                            <li class="breadcrumb-item active">Crear</li>
+                        </ol>
+                    </nav>
+
+                    <div class="formulario" align="left">
+
+                        <h4>Crear</h4>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- {{ form.as_p }} -->
+                            <div class="form-group">
+                                <label for="ubicacion" class="txt_negrita">Ubicación</label> {{ form.ubicacion }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <a href="./" type="submit" class="btn btn-primary">Cancelar</a>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}
