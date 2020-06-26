@@ -1,0 +1,86 @@
+{% extends "template.html" %} {% block content %}
+<main role="main">
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Lista de Elecciones</h5>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    {% if messages %}
+
+                    <ul class="messages list-group mb-3">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <div align="right" class="btn_crear mb-3">
+                        <a href="crear" type="button" class="btn btn-primary">Crear</a>
+                    </div>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="w-auto">Periodo</th>
+                                <th>Fecha</th>
+                                <th>Fecha apertura</th>
+                                <th>Hora apertura</th>
+                                <th>Fecha cierre</th>
+                                <th>Hora cierre</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for eleccion in object_list %}
+                            <tr>
+                                <td>{{ eleccion.periodo }}</td>
+                                <td>{{ eleccion.fecha }}</td>
+                                <td>{{ eleccion.fechaapertura }}</td>
+                                <td>{{ eleccion.horaapertura }}</td>
+                                <td>{{ eleccion.fechacierre }}</td>
+                                <td>{{ eleccion.horacierre }}</td>
+                                <td>{{ eleccion.observaciones }}</td>
+
+                                <form method="POST" action="eliminar/{{eleccion.id}}">
+
+                                    {% csrf_token %}
+
+                                    <td class="btn-group">
+                                        <a href="detalle/{{eleccion.id}}" title="Ver" type="button" class="btn btn-success">Ver </a>
+                                        <a href="editar/{{eleccion.id}}" title="Editar" type="button" class="btn btn-primary">Editar </a>
+                                        <button class="btn btn-danger" onclick="return eliminar('{{eleccion.periodo}}');" type="submit">
+                              Eliminar
+                            </button>
+                                    </td>
+
+                                </form>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+<script type="text/javascript">
+    function eliminar(periodo) {
+        var x = confirm("Estas seguro de eliminar la eleccion: " + periodo);
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+
+{% endblock %}

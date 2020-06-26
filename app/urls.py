@@ -20,12 +20,14 @@ from django.urls import path
 from eleccion.casilla import CasillaListado, CasillaDetalle, CasillaCrear, CasillaActualizar, CasillaEliminar
 from eleccion.candidato import CandidatoListado, CandidatoDetalle, CandidatoCrear, CandidatoActualizar, CandidatoEliminar
 from eleccion.funcionario import FuncionarioListado, FuncionarioDetalle, FuncionarioCrear, FuncionarioActualizar, FuncionarioEliminar
+from eleccion.eleccion import EleccionListado, EleccionDetalle, EleccionCrear, EleccionActualizar, EleccionEliminar
 #from . import views
 
 from django.conf import settings
 from django.conf.urls.static import static 
 
 urlpatterns = [
+    path('', admin.site.urls),
     path('admin/', admin.site.urls),
     # Casillas
     path('casilla/', CasillaListado.as_view(template_name = "casillas/index.html"), name='casilla'), 
@@ -47,4 +49,11 @@ urlpatterns = [
     path('funcionario/crear', FuncionarioCrear.as_view(template_name = "funcionarios/crear.html"), name='crear'),
     path('funcionario/editar/<int:pk>', FuncionarioActualizar.as_view(template_name = "funcionarios/actualizar.html"), name='actualizar'), 
     path('funcionario/eliminar/<int:pk>', FuncionarioEliminar.as_view(), name='eliminar'),  
+
+    # Elecciones
+    path('eleccion/', EleccionListado.as_view(template_name = "elecciones/index.html"), name='eleccion'), 
+    path('eleccion/detalle/<int:pk>', EleccionDetalle.as_view(template_name = "elecciones/detalles.html"), name='detalles'), 
+    path('eleccion/crear', EleccionCrear.as_view(template_name = "elecciones/crear.html"), name='crear'),
+    path('eleccion/editar/<int:pk>', EleccionActualizar.as_view(template_name = "elecciones/actualizar.html"), name='actualizar'), 
+    path('eleccion/eliminar/<int:pk>', EleccionEliminar.as_view(), name='eliminar'),  
 ] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

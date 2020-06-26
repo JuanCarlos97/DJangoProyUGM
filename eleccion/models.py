@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from datetime import datetime, date
 
 
 class Candidato(models.Model):
@@ -32,12 +33,12 @@ class Casilla(models.Model):
 class Eleccion(models.Model):
     id = models.BigAutoField(primary_key=True)
     periodo = models.CharField(max_length=100)
-    fecha = models.DateField(blank=True, null=True)
-    fechaapertura = models.DateField(blank=True, null=True)
-    horaapertura = models.TimeField(blank=True, null=True)
-    fechacierre = models.DateField(blank=True, null=True)
-    horacierre = models.TimeField(blank=True, null=True)
-    observaciones = models.TextField(blank=True, null=True)
+    fecha = models.DateField()
+    fechaapertura = models.DateField()
+    horaapertura = models.TimeField()
+    fechacierre = models.DateField()
+    horacierre = models.TimeField()
+    observaciones = models.TextField()
 
     class Meta:
         managed = False
